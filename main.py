@@ -8,13 +8,17 @@ driver = webdriver.Chrome('C:/Users/andre.nguyen/Downloads/chromedriver_win32/ch
 driver.get('http://codepad.org/')
 
 # Open inspector and right click the html element and select copy XPath to get the link
-driver.find_element(By.XPATH, '//*[@id="editor-form"]/table/tbody/tr[2]/td[1]/nobr[2]/label/input').click()
+driver.find_element(By.XPATH, '//*[@id="editor-form"]/table/tbody/tr[2]/td[1]/nobr[10]/label/input').click()
 
 try:
     textScreen = driver.find_element(By.XPATH, '//*[@id="textarea"]')
     textScreen.send_keys(Keys.TAB)
     textScreen.clear()
-    textScreen.send_keys("Hello World")
+    textScreen.send_keys("print(\"Hello World\")")
 except selenium.common.exceptions.NoSuchElementException:
     print("Error")
     driver.close()
+
+
+driver.find_element(By.XPATH, '//*[@id="editor-form"]/table/tbody/tr[3]/td/table/tbody/tr/td/div/table/tbody/tr/td[3]/button').click()
+
