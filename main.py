@@ -1,16 +1,20 @@
-# This is a sample Python script.
+import selenium
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Need to install chromedriver
+driver = webdriver.Chrome('C:/Users/andre.nguyen/Downloads/chromedriver_win32/chromedriver.exe')
+driver.get('http://codepad.org/')
 
+# Open inspector and right click the html element and select copy XPath to get the link
+driver.find_element(By.XPATH, '//*[@id="editor-form"]/table/tbody/tr[2]/td[1]/nobr[2]/label/input').click()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+try:
+    textScreen = driver.find_element(By.XPATH, '//*[@id="textarea"]')
+    textScreen.send_keys(Keys.TAB)
+    textScreen.clear()
+    textScreen.send_keys("Hello World")
+except selenium.common.exceptions.NoSuchElementException:
+    print("Error")
+    driver.close()
